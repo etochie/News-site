@@ -1,0 +1,17 @@
+{% extends 'news/base_news.html' %}
+
+{% block title %}
+    {{ article.title }}
+{% endblock %}
+
+{% block content %}
+    <h1 class="mt-5">
+        {{ article.title }}
+    </h1>
+    <h3 class="mt-1">
+        {{ article.title2 }}
+    </h3>
+    <p>
+        {{ article.body }}
+    </p>
+{% endblock %}

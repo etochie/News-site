@@ -1,0 +1,20 @@
+{% extends 'news/base_news.html' %}
+
+{% block title %}
+    News
+{% endblock %}
+
+{% block image %}
+    {{ 'https://sun9-4.userapi.com/c854024/v854024605/f1fbf/CxaQ7RfB0TQ.jpg' }}
+{% endblock %}
+
+{% block content %}
+    <div class="card-group">
+
+        {% for article in articles %}
+            {% include 'news/includes/article_card_template.html' %}
+        {% endfor %}
+
+    </div>
+
+{% endblock %}
