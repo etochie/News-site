@@ -6,8 +6,12 @@
 
 {% block content %}
 
-    {% for article in tag.posts.all %}
-        {% include 'news/includes/article_card_template.html' %}
-    {% endfor %}
+        <div class="card-group" style="padding: 2.25rem; background: #f2f2f2; border-radius: 10px">
+
+            {% for article in tag.posts.all %}
+                {% include 'news/includes/article_card_template.html' %}
+            {% endfor %}
+
+        </div>
 
 {% endblock %}
