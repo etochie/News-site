@@ -17,7 +17,12 @@ class Article(models.Model):
     img = models.ImageField(upload_to='images/', blank=True)
     slug = models.SlugField(max_length=100, blank=True, unique=True)
     body = models.TextField()
+    tag = models.ManyToManyField('Tag', blank=False, related_name='posts')
     pub_date = models.DateTimeField(default=timezone.now, blank=False)
+
+
+    class Meta:
+        ordering = ['-pub_date']
 
     def __str__(self):
         return self.title
@@ -29,4 +34,16 @@ class Article(models.Model):
 
     def get_detail_url(self):
         return reverse('news:article_detail_url', kwargs={'slug': self.slug})
+
+
+class Tag(models.Model):
+    title = models.CharField(max_length=50)
+    slug = models.SlugField(max_length=50, unique=True)
+
+    def __str__(self):
+        return self.title
+
+    def get_detail_url(self):
+        return reverse('news:tag_detail_url', kwargs={'slug': self.slug})
+
 

@@ -4,8 +4,14 @@
     News
 {% endblock %}
 
-{% block image %}
-    {{ 'https://sun9-4.userapi.com/c854024/v854024605/f1fbf/CxaQ7RfB0TQ.jpg' }}
+{% block navbar %}
+
+    {% for tag in tags %}
+        <li class="nav-item">
+            <a class="nav-link" href="{{ tag.get_detail_url }}">{{ tag.title }}<span class="sr-only">(current)</span></a>
+        </li>
+    {% endfor %}
+
 {% endblock %}
 
 {% block content %}

@@ -1,0 +1,13 @@
+{% extends 'news/base_news.html' %}
+
+{% block title %}
+    {{ tag.title }}
+{% endblock %}
+
+{% block content %}
+
+    {% for article in tag.posts.all %}
+        {% include 'news/includes/article_card_template.html' %}
+    {% endfor %}
+
+{% endblock %}
