@@ -1,10 +1,11 @@
 <div class="card" style="border-radius: 10px">
-    <p>
-        <a href="{{ article.get_detail_url }}"><img src="{{ article.img }}" class="card-img-top"></a>
-    </p>
-
     <a href="{{ article.get_detail_url }}" style="color: #000; text-decoration: none">
         <div class="card-body">
+            {% if article.img %}
+                <p><img src="{{ article.img.url }}" width="320" style="border-radius: 10px"></p>
+            {% else %}
+                <p></p>
+            {% endif %}
             <b class="card-title">{{ article.title }}</b>
             <p class="card-title">{{ article.title2 }}</p>
             <p class="card-text"><small class="text-muted">{{ article.pub_date }}</small></p>
