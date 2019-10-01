@@ -11,11 +11,13 @@ class ArticleAdmin(admin.ModelAdmin):
          {'fields': ['pub_date'], 'classes': ['collapse']}),
     ]
 
+
 class TagAdmin(admin.ModelAdmin):
     fieldsets = [
         (None,
          {'fields': ['title', 'slug']})
     ]
+
 
 admin.site.register(Article, ArticleAdmin)
 admin.site.register(Tag, TagAdmin)

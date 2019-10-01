@@ -12,9 +12,11 @@ def gen_slug(s):
     return new_slug + '-' + time_slug
 
 
-# def gen_img_name(s):
-#     img_name = slugify(s)
-#     return img_name + '.jpg'
+# def gen_img_name(old_name, new_name):
+#     new_split = old_name.split('.')  # разделяем расширение от названия
+#     extension = new_split[1]  # расширение
+#     new_gen_name = slugify(new_name)
+#     return new_gen_name + '.' + extension
 
 
 class Article(models.Model):
@@ -33,10 +35,10 @@ class Article(models.Model):
         return self.title
 
     def save(self, *args, **kwargs):
-        if not self.id:
+        if not self.id:  # сохранение сгенерированного slug
             self.slug = gen_slug(self.title[:20])
         # if self.img:
-        #     name = gen_img_name(self.title[:15])
+        #     name = gen_img_name(self.img.name, self.title[15])
         #     self.img.name = name
         return super().save(*args, **kwargs)
 
