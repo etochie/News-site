@@ -45,6 +45,13 @@ class Article(models.Model):
     def get_detail_url(self):
         return reverse('news:article_detail_url', kwargs={'slug': self.slug})
 
+    def get_pub_date(self):
+        year = self.pub_date.year
+        month = self.pub_date.month
+        day = self.pub_date.day
+        date = [year, month, day]
+        return date
+
 
 class Tag(models.Model):
     title = models.CharField(max_length=50)
