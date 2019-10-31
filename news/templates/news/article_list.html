@@ -1,0 +1,16 @@
+{% extends 'news/base_news.html' %}
+
+{% block title %}
+    News
+{% endblock %}
+
+
+{% block content %}
+    {% for article in popular_list  %}
+        <div class="card-columns" style="padding: 2.25rem; background: #f2f2f2; border-radius: 10px">
+            {% for article in articles %}
+                {% include 'news/includes/article_card_template.html' %}
+            {% endfor %}
+        </div>
+    {% endfor %}
+{% endblock %}

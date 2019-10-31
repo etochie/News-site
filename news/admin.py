@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Article, Tag
+from .models import *
 
 
 class ArticleAdmin(admin.ModelAdmin):
@@ -10,6 +10,7 @@ class ArticleAdmin(admin.ModelAdmin):
         ('Date information',
          {'fields': ['pub_date'], 'classes': ['collapse']}),
     ]
+    list_display = ('__str__', 'pub_date', 'views')
 
 
 class TagAdmin(admin.ModelAdmin):
@@ -19,5 +20,11 @@ class TagAdmin(admin.ModelAdmin):
     ]
 
 
+class ArticleStatisticAdmin(admin.ModelAdmin):
+    search_fields = ('__str__', )
+    list_display = ('__str__', 'date', 'views')
+
+
 admin.site.register(Article, ArticleAdmin)
 admin.site.register(Tag, TagAdmin)
+admin.site.register(ArticleStatistic, ArticleStatisticAdmin)

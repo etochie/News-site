@@ -6,5 +6,6 @@ app_name = 'news'
 urlpatterns = [
     path('', views.index, name='index'),
     path('<str:slug>/', views.article_detail, name='article_detail_url'),
-    path('tag/<str:slug>/', views.tag_detail, name='tag_detail_url')
+    path('tag/<str:slug>/', views.tag_detail, name='tag_detail_url'),
+    # path('popular/', , name='popular_list')
 ]

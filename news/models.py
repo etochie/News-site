@@ -27,6 +27,7 @@ class Article(models.Model):
     body = models.TextField()
     tag = models.ManyToManyField('Tag', blank=False, related_name='posts')
     pub_date = models.DateTimeField(default=timezone.now, blank=False)
+    views = models.IntegerField('Просмотры', default=0)
 
     class Meta:
         ordering = ['-pub_date']
@@ -51,6 +52,18 @@ class Article(models.Model):
         day = self.pub_date.day
         date = [year, month, day]
         return date
+
+
+class ArticleStatistic(models.Model):
+    article = models.ForeignKey(Article, on_delete=models.CASCADE)
+    date = models.DateField('Дата', default=timezone.now)
+    views = models.IntegerField('Просмотры', default=0)
+
+    class Meta:
+        db_table = 'ArticleStatistic'
+
+    def __str__(self):
+        return self.article.title
 
 
 class Tag(models.Model):

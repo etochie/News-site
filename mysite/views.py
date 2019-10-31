@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import redirect
+
 
 def start_page(request):
-    return render(request, 'start_page.html')
+    return redirect('news:index', permanent=True)
