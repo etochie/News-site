@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Article, Tag, ArticleStatistic
+from .models import Article, Tag, ArticleViews
 
 
 class ArticleAdmin(admin.ModelAdmin):
@@ -20,11 +20,6 @@ class TagAdmin(admin.ModelAdmin):
     ]
 
 
-class ArticleStatisticAdmin(admin.ModelAdmin):
-    search_fields = ('__str__', )
-    list_display = ('__str__', 'date', 'views')
-
-
 admin.site.register(Article, ArticleAdmin)
 admin.site.register(Tag, TagAdmin)
-admin.site.register(ArticleStatistic, ArticleStatisticAdmin)
+admin.site.register(ArticleViews)

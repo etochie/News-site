@@ -13,13 +13,6 @@ def gen_slug(text):
     return new_slug + '-' + time_slug
 
 
-# def gen_img_name(old_name, new_name):
-#     new_split = old_name.split('.')  # разделяем расширение от названия
-#     extension = new_split[1]  # расширение
-#     new_gen_name = slugify(new_name)
-#     return new_gen_name + '.' + extension
-
-
 class Article(models.Model):
     title = models.CharField(max_length=200)
     title2 = models.CharField(max_length=300, blank=True)
@@ -28,7 +21,6 @@ class Article(models.Model):
     body = models.TextField()
     tag = models.ManyToManyField('Tag', blank=True, related_name='posts')
     pub_date = models.DateTimeField(default=timezone.now, blank=False)
-    views = models.IntegerField('Просмотры', default=0)
 
     class Meta:
         ordering = ['-pub_date']
@@ -54,17 +46,31 @@ class Article(models.Model):
         date = [year, month, day]
         return date
 
+    def get_views(self):
+        # костыльным методом определяем количество просмотров статьи
+        queryset = ArticleViews.objects.filter(article=self) # фильтр по объектам, содержащих self статью
+        views = len(queryset) # количество статей в списке ¯\_(ツ)_/¯
+        return views
 
-class ArticleStatistic(models.Model):
-    article = models.ForeignKey(Article, on_delete=models.CASCADE)
-    date = models.DateField('Дата', default=timezone.now)
-    views = models.IntegerField('Просмотры', default=0)
 
-    class Meta:
-        db_table = 'ArticleStatistic'
+class ArticleViews(models.Model):
+    """Модель для статистики просмотров статей
+
+    Поля:
+        article -- связь со статьей
+        ip -- ip пользователя из request
+        session -- session из request
+        created -- дата и время последнего(!) просмотра статьи
+    """
+    article = models.ForeignKey(Article,
+                                on_delete=models.CASCADE,
+                                related_name='views')
+    ip = models.CharField(max_length=40)
+    session = models.CharField(max_length=40)
+    created = models.DateTimeField(verbose_name='last_view', auto_now=True)
 
     def __str__(self):
-        return self.article.title
+        return '{} | {}'.format(self.article.title, self.ip)
 
 
 class Tag(models.Model):
