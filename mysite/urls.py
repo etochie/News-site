@@ -23,6 +23,7 @@ urlpatterns = [
     path('', views.start_page),
     path('news/', include('news.urls'), name='news_page'),
     path('admin/', admin.site.urls, name='admin_page'),
+    path('api/', include('news.api_urls'), name='news_api')
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

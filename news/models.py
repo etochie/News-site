@@ -1,13 +1,14 @@
+from time import time
+
 from django.db import models
 from django.utils import timezone
 from django.shortcuts import reverse
 
 from pytils.translit import slugify
-from time import time
 
 
-def gen_slug(s):
-    new_slug = slugify(s)
+def gen_slug(text):
+    new_slug = slugify(text)
     time_slug = str(int(time()))
     return new_slug + '-' + time_slug
 
@@ -25,7 +26,7 @@ class Article(models.Model):
     img = models.ImageField(blank=True)
     slug = models.SlugField(max_length=100, blank=True, unique=True)
     body = models.TextField()
-    tag = models.ManyToManyField('Tag', blank=False, related_name='posts')
+    tag = models.ManyToManyField('Tag', blank=True, related_name='posts')
     pub_date = models.DateTimeField(default=timezone.now, blank=False)
     views = models.IntegerField('Просмотры', default=0)
 
@@ -75,5 +76,3 @@ class Tag(models.Model):
 
     def get_detail_url(self):
         return reverse('news:tag_detail_url', kwargs={'slug': self.slug})
-
-

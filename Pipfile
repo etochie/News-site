@@ -1,0 +1,22 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+rope = "*"
+yapf = "*"
+django-rest-swagger = "*"
+coreapi = "*"
+
+[packages]
+pytils = "==0.3"
+pytz = "==2019.3"
+sqlparse = "==0.3.0"
+Django = "==2.2.6"
+Pillow = "==6.2.1"
+django-cleanup = "==4.0.0"
+djangorestframework = "*"
+
+[requires]
+python_version = "3.7"
